@@ -1,14 +1,19 @@
 package org.cap.accountmgmt.entities;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Account")
 public class Account {
+	@Min(value=12)
 	private String accountId;
 	private String accountHolderId;
 	private String accountBranchId;
@@ -16,9 +21,34 @@ public class Account {
 	private String accountStatus;
 	private Double accountBalance;
 	private Double accountInterest;
-	private LocalDate lastUpdated;
+	@DateTimeFormat(pattern = "YYYY/MM/dd")
+	private Date lastUpdated;
 	
-    @Id
+	 /**
+     * default Non parametrized constructor
+     */
+	public Account() {
+		
+	}
+	
+
+	 /**
+    * default parametrized constructor
+    */
+
+	public Account(String accountId, String accountHolderId, String accountBranchId, String accountType,
+			String accountStatus, Double accountBalance, Double accountInterest, Date lastUpdated) {
+		this.accountId = accountId;
+		this.accountHolderId = accountHolderId;
+		this.accountBranchId = accountBranchId;
+		this.accountType = accountType;
+		this.accountStatus = accountStatus;
+		this.accountBalance = accountBalance;
+		this.accountInterest = accountInterest;
+		this.lastUpdated = lastUpdated;
+	}
+
+	@Id
 	public String getAccountId() {
 		return accountId;
 	}
@@ -61,70 +91,48 @@ public class Account {
 	public void setAccountIntrest(Double accountInterest) {
 		this.accountInterest = accountInterest;
 	}
-	public LocalDate getLastUpdated() {
+	public Date getLastUpdated() {
 		return lastUpdated;
 	}
-	public void setLastUpdated(LocalDate lastUpdated) {
+	public void setLastUpdated(Date lastUpdated) {
 		this.lastUpdated = lastUpdated;
 	}
 
-	
+
+    /**
+     * override hashcode
+     * @return hashcode
+     */
 	@Override
 	public int hashCode() {     
     return accountId.hashCode();
     }
 	
 	
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Account other = (Account) obj;
-		if (accountBalance == null) {
-			if (other.accountBalance != null)
-				return false;
-		} else if (!accountBalance.equals(other.accountBalance))
-			return false;
-		if (accountBranchId == null) {
-			if (other.accountBranchId != null)
-				return false;
-		} else if (!accountBranchId.equals(other.accountBranchId))
-			return false;
-		if (accountHolderId == null) {
-			if (other.accountHolderId != null)
-				return false;
-		} else if (!accountHolderId.equals(other.accountHolderId))
-			return false;
-		if (accountId == null) {
-			if (other.accountId != null)
-				return false;
-		} else if (!accountId.equals(other.accountId))
-			return false;
-		if (accountInterest == null) {
-			if (other.accountInterest != null)
-				return false;
-		} else if (!accountInterest.equals(other.accountInterest))
-			return false;
-		if (accountStatus == null) {
-			if (other.accountStatus != null)
-				return false;
-		} else if (!accountStatus.equals(other.accountStatus))
-			return false;
-		if (accountType == null) {
-			if (other.accountType != null)
-				return false;
-		} else if (!accountType.equals(other.accountType))
-			return false;
-		if (lastUpdated == null) {
-			if (other.lastUpdated != null)
-				return false;
-		} else if (!lastUpdated.equals(other.lastUpdated))
-			return false;
-		return true;
-	}
+
+    /**
+     *  check equality of account object
+     * @param object
+     * @return
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || !(object instanceof Account)) return false;
+        Account account = (Account) object;
+        return this.accountId.equals(account.getAccountId());
+    }
+
+    /**
+     *
+     * @return combine details of account
+     */
+    @Override
+   	public String toString() {
+   		return "Account [accountId=" + accountId + ", accountHolderId=" + accountHolderId + ", accountBranchId="
+   				+ accountBranchId + ", accountType=" + accountType + ", accountStatus=" + accountStatus
+   				+ ", accountBalance=" + accountBalance + ", accountInterest=" + accountInterest + ", lastUpdated="
+   				+ lastUpdated + "]";
+   	}
+
 }
