@@ -13,9 +13,9 @@ boolean deleteAccount(String accountId);
 Account showAccountDetails(String accountId);
 Account findByAccountId(String accountId);
 List<Account> fetchAllAccounts();
-boolean updateCustomerName(Account account, Customer customer);
-boolean updateCustomerContact(Account account, Customer customer);
-boolean updateCustomerAddress(Account account, Address address);
+boolean updateCustomerName(String accountId, String customerName);
+boolean updateCustomerContact(String accountId, String customerContact);
+boolean updateCustomerAddress(String accountId, Address address);
 String  addCustomerDetails(Customer customer, Address address);
 }
  

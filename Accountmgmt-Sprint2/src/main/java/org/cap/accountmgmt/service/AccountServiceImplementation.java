@@ -152,27 +152,46 @@ public class AccountServiceImplementation implements IAccountService {
 	}
 
 	@Override
-	public boolean updateCustomerName(Account account, Customer customer) {
-	
-		return false;
+	public boolean updateCustomerName(String accountId, String customerName) {
+		Account account = findByAccountId(accountId);
+		Customer customer = new Customer();
+		if (account == null) {
+			return false;
+		}
+		customer.setCustomerName(customerName);
+		return true;
 	}
 
 	@Override
-	public boolean updateCustomerContact(Account account, Customer customer) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean updateCustomerContact(String accountId, String customerContact) {
+		Account account = findByAccountId(accountId);
+		Customer customer = new Customer();
+		if (account != null) {
+			customer.setCustomerContact(customerContact);
+		}
+		return true;
 	}
 
 	@Override
-	public boolean updateCustomerAddress(Account account, Address address) {
-		// TODO Auto-generated method stub
+	public boolean updateCustomerAddress(String accountId, Address address) {
+		Account account = findByAccountId(accountId);
+		Address address1 = new Address();
+		if (account != null) {
+			address1 = addressDao.save(address);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public String addCustomerDetails(Customer customer, Address address) {
-		// TODO Auto-generated method stub
-		return null;
+		Customer customer1 = new Customer();
+		Address address1 = new Address();
+		customer1 = customerDao.save(customer);
+		address1 = addressDao.save(address);
+		if (customer1 == null && address1 == null) {
+			return "Customer details not added";
+		}
+		return "Customer details added successfully";
 	}
-
 }

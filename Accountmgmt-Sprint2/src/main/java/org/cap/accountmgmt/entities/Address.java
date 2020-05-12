@@ -1,6 +1,8 @@
 package org.cap.accountmgmt.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
@@ -8,6 +10,8 @@ import javax.validation.constraints.Min;
 @Table(name = "Address")
 public class Address {
 	@Min(value = 6)
+	@Id
+	@GeneratedValue
 	private String addressId;
 	private String addressLine;
 	private String addressCity;

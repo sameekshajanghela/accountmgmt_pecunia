@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -14,8 +15,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "Account")
 public class Account {
 	@Min(value=12)
+	@Id
+	@GeneratedValue
 	private String accountId;
 	private String accountHolderId;
+	@Min(value=4)
 	private String accountBranchId;
 	private String accountType;
 	private String accountStatus;
