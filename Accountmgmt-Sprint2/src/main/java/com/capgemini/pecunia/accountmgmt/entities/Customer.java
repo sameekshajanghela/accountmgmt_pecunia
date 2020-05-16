@@ -1,13 +1,12 @@
-package com.capgemini.accountmgmt.entities;
+package com.capgemini.pecunia.accountmgmt.entities;
 
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import com.capgemini.accountmgmt.entities.Address;
 
 @Entity
 @Table(name = "customer")
@@ -20,8 +19,8 @@ public class Customer {
 	@NotBlank(message = "Customername cannot be empty and only alphabets are allowed")
 	private String customerName;
 
-	@NotBlank(message = "All fields are required")
-	private String customerAddress;
+    @OneToOne
+	private Address customerAddress;
 
 	@Min(value = 12)
 	private String customerAadhar;
@@ -59,11 +58,11 @@ public class Customer {
 		this.customerName = customerName;
 	}
 
-	public String getCustomerAddress() {
+	public Address getCustomerAddress() {
 		return customerAddress;
 	}
 
-	public void setCustomerAddress(String customerAddress) {
+	public void setCustomerAddress(Address customerAddress) {
 		this.customerAddress = customerAddress;
 	}
 
@@ -107,26 +106,6 @@ public class Customer {
 		this.customerDob = customerDob;
 	}
 
-	/**
-	 * default Non parametrized constructor
-	 */
-	public Customer() {
-	}
-
-	/**
-	 * parametrized constructor
-	 */
-	public Customer(String customerId, String customerName, String customerAddress, String customerAadhar,
-			String customerPan, String customerContact, String customerGender, Date customerDob) {
-		this.customerId = customerId;
-		this.customerName = customerName;
-		this.customerAddress = customerAddress;
-		this.customerAadhar = customerAadhar;
-		this.customerPan = customerPan;
-		this.customerContact = customerContact;
-		this.customerGender = customerGender;
-		this.customerDob = customerDob;
-	}
 
 	/**
 	 * override hashcode

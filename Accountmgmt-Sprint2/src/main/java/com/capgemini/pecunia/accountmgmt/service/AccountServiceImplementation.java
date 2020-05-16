@@ -1,16 +1,18 @@
-package com.capgemini.accountmgmt.service;
+package com.capgemini.pecunia.accountmgmt.service;
 
 import java.util.List;
 import java.util.Optional;
-import com.capgemini.accountmgmt.dao.IAccountDao;
-import com.capgemini.accountmgmt.dao.IAddressDao;
-import com.capgemini.accountmgmt.dao.ICustomerDao;
-import com.capgemini.accountmgmt.entities.Account;
-import com.capgemini.accountmgmt.entities.Address;
-import com.capgemini.accountmgmt.entities.Customer;
-import com.capgemini.accountmgmt.exceptions.AccountNotFoundException;
-import com.capgemini.accountmgmt.exceptions.InvalidArgumentException;
-import com.capgemini.accountmgmt.util.AccountUtil;
+
+import com.capgemini.pecunia.accountmgmt.dao.IAccountDao;
+import com.capgemini.pecunia.accountmgmt.dao.IAddressDao;
+import com.capgemini.pecunia.accountmgmt.dao.ICustomerDao;
+import com.capgemini.pecunia.accountmgmt.entities.Account;
+import com.capgemini.pecunia.accountmgmt.entities.Address;
+import com.capgemini.pecunia.accountmgmt.entities.Customer;
+import com.capgemini.pecunia.accountmgmt.exceptions.AccountNotFoundException;
+import com.capgemini.pecunia.accountmgmt.exceptions.CustomerNotFoundException;
+import com.capgemini.pecunia.accountmgmt.exceptions.InvalidArgumentException;
+import com.capgemini.pecunia.accountmgmt.util.AccountUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +35,6 @@ public class AccountServiceImplementation implements IAccountService {
 	private IAddressDao addressDao;
 
 	/**
-	 *
 	 * @param account,customer,address This method will validate account and add it
 	 *                                 to the database
 	 * @return account
@@ -43,14 +44,25 @@ public class AccountServiceImplementation implements IAccountService {
 		if (account == null) {
 			throw new InvalidArgumentException("Account can't be null");
 		}
+		if (address == null) {
+			throw new InvalidArgumentException("Address can't be null");
+		}
+		if (customer == null) {
+			throw new InvalidArgumentException("Customer can't be null");
+
+		}
+		String addressId = AccountUtil.generateId(6);
+		address.setAddressId(addressId);
+		addressDao.save(address);
+
 		String customerId = AccountUtil.generateId(6);
 		customer.setCustomerId(customerId);
+		customer.setCustomerAddress(address);
 		customerDao.save(customer);
-		String addressId = AccountUtil.generateId(6);
-		address.setAddressId(customerId);
-		addressDao.save(address);
+
 		String accountId = AccountUtil.generateId(12);
 		account.setAccountId(accountId);
+		account.setCustomer(customer);
 		accountDao.save(account);
 		return "Account Successfully Added";
 	}
@@ -66,7 +78,6 @@ public class AccountServiceImplementation implements IAccountService {
 	}
 
 	/**
-	 *
 	 * @param accountId This method will fetch the account by account id
 	 * @return
 	 */
@@ -80,9 +91,19 @@ public class AccountServiceImplementation implements IAccountService {
 		throw new AccountNotFoundException("account not found for id=" + accountId);
 	}
 
+	@Override
+	public Customer findByCustomerId(String customerId) {
+		Optional<Customer> optional = customerDao.findById(customerId);
+		if (optional.isPresent()) {
+			Customer customer = optional.get();
+			return customer;
+		}
+		throw new CustomerNotFoundException("customer not found for id=" + customerId);
+	}
+
 	/**
 	 * This method will return list of all account
-	 * 
+	 *
 	 * @return List of accounts
 	 */
 	@Override
@@ -104,61 +125,48 @@ public class AccountServiceImplementation implements IAccountService {
 
 	/**
 	 * This method will update the customer name
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
-	public boolean updateCustomerName(Account account, Customer customer) {
+	public String updateCustomerName(Account account, Customer customer) {
 		boolean exists = accountDao.existsById(account.getAccountId());
 		if (exists) {
 			customer = customerDao.save(customer);
-			return true;
+			return "Customer Name Updated Successfully";
 		}
-		return false;
+		return " Update Unsuccessful";
 	}
 
 	/**
 	 * This method will update the customer contact
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
-	public boolean updateCustomerContact(Account account, Customer customer) {
+	public String updateCustomerContact(Account account, Customer customer) {
 		boolean exists = accountDao.existsById(account.getAccountId());
 		if (exists) {
 			customer = customerDao.save(customer);
-			return true;
+			return "Customer Contact Updated Succesfully";
 		}
-		return false;
+		return "Update Unsuccessful";
 	}
 
 	/**
 	 * This method will update the customer address
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
-	public boolean updateCustomerAddress(Account account, Address address) {
+	public String updateCustomerAddress(Account account, Address address) {
 		boolean exists = accountDao.existsById(account.getAccountId());
 		if (exists) {
 			address = addressDao.save(address);
-			return true;
+			return "Customer address added successfully";
 		}
-		return false;
+		return "Update Unsuccessful";
 	}
 
-	/**
-	 * This method will add customer details
-	 * 
-	 * @return
-	 */
-	@Override
-	public String addCustomerDetails(Customer customer, Address address) {
-		if (customer != null || address != null) {
-			customer = customerDao.save(customer);
-			address = addressDao.save(address);
-			return "Customer details added successfully";
-		}
-		return "Customer details not added";
-	}
+	
 }

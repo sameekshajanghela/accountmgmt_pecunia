@@ -1,4 +1,4 @@
-package com.capgemini.accountmgmt.exceptions;
+package com.capgemini.pecunia.accountmgmt.exceptions;
 
 public class InvalidArgumentException extends RuntimeException {
 	public InvalidArgumentException(String msg) {

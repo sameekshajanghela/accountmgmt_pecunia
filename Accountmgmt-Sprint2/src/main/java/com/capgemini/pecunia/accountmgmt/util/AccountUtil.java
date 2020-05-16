@@ -1,12 +1,13 @@
-package com.capgemini.accountmgmt.util;
+package com.capgemini.pecunia.accountmgmt.util;
 
 import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
-import com.capgemini.accountmgmt.entities.Account;
-import com.capgemini.accountmgmt.entities.Address;
-import com.capgemini.accountmgmt.entities.Customer;
+import com.capgemini.pecunia.accountmgmt.dto.AccountDetails;
+import com.capgemini.pecunia.accountmgmt.entities.Account;
+import com.capgemini.pecunia.accountmgmt.entities.Address;
+import com.capgemini.pecunia.accountmgmt.entities.Customer;
 
 public class AccountUtil {
 
@@ -28,7 +29,7 @@ public class AccountUtil {
 		Account account = new Account();
 		double accountBalance = (double) request.get("accountBalance");
 		account.setAccountBalance(accountBalance);
-		String accountBranchId = (String) request.get("branchId");
+		String accountBranchId = (String) request.get("accountBranchId");
 		account.setAccountBranchId(accountBranchId);
 		String accountType = (String) request.get("accountType");
 		account.setAccountType(accountType);
@@ -36,18 +37,28 @@ public class AccountUtil {
 		account.setAccountStatus(accountStatus);
 		double accountInterest = (double) request.get("accountInterest");
 		account.setAccountInterest(accountInterest);
-		Date lastUpdated = (Date) request.get("lastUpdate");
+		Date lastUpdated = (Date) request.get("lastUpdated");
 		account.setLastUpdated(lastUpdated);
 		return account;
 		
+	}
+
+	public static AccountDetails convertToDetails(Account account){
+		AccountDetails details=new AccountDetails();
+        details.setAccountId(account.getAccountId());
+        details.setAccountBalance(account.getAccountBalance());
+        details.setAccountInterest(account.getAccountInterest());
+        details.setAccountBranchId(account.getAccountBranchId());
+        details.setAccountHolderId(account.getAccountHolderId());
+        details.setAccountStatus(account.getAccountStatus());
+        details.setAccountStatus(account.getAccountStatus());
+		return details;
 	}
 	
 	public static Customer convertToCustomer(Map<String,Object> request) {
 		Customer customer = new Customer();
 		String customerName = (String) request.get("customerName");
 		customer.setCustomerName(customerName);
-		String customerAddress = (String) request.get("customerAddress");
-		customer.setCustomerAddress(customerAddress);
 		Date customerDob = (Date) request.get("customerDob");
 		customer.setCustomerDob(customerDob);
 		String customerGender = (String) request.get("customerGender");

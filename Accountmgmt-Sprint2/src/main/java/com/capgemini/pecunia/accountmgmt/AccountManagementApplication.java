@@ -1,4 +1,4 @@
-package com.capgemini.accountmgmt;
+package com.capgemini.pecunia.accountmgmt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

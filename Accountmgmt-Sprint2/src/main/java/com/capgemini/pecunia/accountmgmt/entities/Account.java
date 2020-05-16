@@ -1,15 +1,13 @@
-package com.capgemini.accountmgmt.entities;
+package com.capgemini.pecunia.accountmgmt.entities;
 
 
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "account")
@@ -25,34 +23,30 @@ public class Account {
 	private String accountStatus;
 	private Double accountBalance;
 	private Double accountInterest;
-	@DateTimeFormat(pattern = "YYYY/MM/dd")
 	private Date lastUpdated;
-	
-	 /**
-     * default Non parametrized constructor
-     */
-	public Account() {
-		
-	}
-	
 
-	 /**
-    * default parametrized constructor
-    */
+	@OneToOne
+	private Customer customer;
 
-	public Account(String accountId, String accountHolderId, String accountBranchId, String accountType,
-			String accountStatus, Double accountBalance, Double accountInterest, Date lastUpdated) {
-		this.accountId = accountId;
-		this.accountHolderId = accountHolderId;
-		this.accountBranchId = accountBranchId;
-		this.accountType = accountType;
-		this.accountStatus = accountStatus;
-		this.accountBalance = accountBalance;
-		this.accountInterest = accountInterest;
-		this.lastUpdated = lastUpdated;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	@Id
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	@OneToOne
+	private Address address;
+
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	public String getAccountId() {
 		return accountId;
 	}

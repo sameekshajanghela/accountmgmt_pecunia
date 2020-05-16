@@ -1,6 +1,6 @@
-package com.capgemini.accountmgmt.dao;
+package com.capgemini.pecunia.accountmgmt.dao;
 
-import com.capgemini.accountmgmt.entities.Address;
+import com.capgemini.pecunia.accountmgmt.entities.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

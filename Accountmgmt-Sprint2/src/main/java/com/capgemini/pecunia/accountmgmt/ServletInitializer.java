@@ -1,4 +1,4 @@
-package com.capgemini.accountmgmt;
+package com.capgemini.pecunia.accountmgmt;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
