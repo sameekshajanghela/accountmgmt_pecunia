@@ -29,7 +29,7 @@ public class AccountUtil {
 		Account account = new Account();
 		double accountBalance = (double) request.get("accountBalance");
 		account.setAccountBalance(accountBalance);
-		String accountBranchId = (String) request.get("accountBranchId");
+		String accountBranchId = (String) request.get("branchId");
 		account.setAccountBranchId(accountBranchId);
 		String accountType = (String) request.get("accountType");
 		account.setAccountType(accountType);
@@ -37,7 +37,7 @@ public class AccountUtil {
 		account.setAccountStatus(accountStatus);
 		double accountInterest = (double) request.get("accountInterest");
 		account.setAccountInterest(accountInterest);
-		Date lastUpdated = (Date) request.get("lastUpdated");
+		Date lastUpdated = (Date) request.get("lastUpdate");
 		account.setLastUpdated(lastUpdated);
 		return account;
 		
@@ -48,10 +48,6 @@ public class AccountUtil {
         details.setAccountId(account.getAccountId());
         details.setAccountBalance(account.getAccountBalance());
         details.setAccountInterest(account.getAccountInterest());
-        details.setAccountBranchId(account.getAccountBranchId());
-        details.setAccountHolderId(account.getAccountHolderId());
-        details.setAccountStatus(account.getAccountStatus());
-        details.setAccountStatus(account.getAccountStatus());
 		return details;
 	}
 	
