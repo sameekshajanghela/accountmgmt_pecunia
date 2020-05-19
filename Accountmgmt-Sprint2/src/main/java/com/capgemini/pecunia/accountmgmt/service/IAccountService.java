@@ -15,11 +15,8 @@ public interface IAccountService {
 
 	Account findByAccountById(String accountId);
 
-	List<Account> fetchAllAccounts();
-
 	String updateCustomerName(Account account, Customer customer);
 
-    String updateCustomerContact(Account account, Customer customer);
+        String updateCustomerContact(Account account, Customer customer);
 
-	Customer findByCustomerId(String customerId);
 }
