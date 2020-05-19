@@ -95,27 +95,6 @@ public class AccountServiceImplementation implements IAccountService {
 		throw new AccountNotFoundException("account not found for id=" + accountId);
 	}
 
-	@Override
-	public Customer findByCustomerId(String customerId) {
-		Optional<Customer> optional = customerDao.findById(customerId);
-		if (optional.isPresent()) {
-			Customer customer = optional.get();
-			return customer;
-		}
-		throw new CustomerNotFoundException("customer not found for id=" + customerId);
-	}
-
-	/**
-	 * This method will return list of all account
-	 *
-	 * @return List of accounts
-	 */
-	@Override
-	public List<Account> fetchAllAccounts() {
-		List<Account> list = accountDao.findAll();
-		return list;
-	}
-
 	/**
 	 * @param accountId This method will delete the account by account id
 	 * @return
