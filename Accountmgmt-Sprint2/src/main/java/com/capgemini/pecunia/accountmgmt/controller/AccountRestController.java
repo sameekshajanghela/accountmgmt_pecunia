@@ -84,35 +84,7 @@ public class AccountRestController {
         return response;
     }
 
-    /**
-     * update address by account id
-     *
-     * @param accountId
-     * @return response to server
-     */
-    @PutMapping("/{accountId}/updateaddress")
-    public ResponseEntity<String> updateCustomerAddress(@RequestBody Map<String, Object> request,
-                                                        @PathVariable("accountId") String accountId) {
-        Account account = accountService.findByAccountById(accountId);
-        Address address = account.getAddress();
-       
-       /* String newAddressLine = request.get("addressLine");
-        String newCity = request.get("addressCity");
-        String newState = request.get("addressState");
-        String newCountry = request.get("addressCountry");
-        String newZipcode = request.get("addressZipcode");
-        address.setAddressLine(newAddressLine);
-        address.setAddressCity(newCity);
-        address.setAddressState(newState);
-        address.setAddressCountry(newCountry);
-        address.setAddressZipcode(newZipcode);
-        */
-        address = AccountUtil.convertToAddress(request);
-        String msg = accountService.updateCustomerAddress(account, address);
-        ResponseEntity<String> response = new ResponseEntity<String>(msg, HttpStatus.OK);
-        return response;
-
-    }
+   
 
     /**
      * fetch account object by account id
