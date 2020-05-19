@@ -68,7 +68,7 @@ public class AccountServiceImplementation implements IAccountService {
         account.setCustomer(customer);
         account.setLastUpdated(new Date());
 		account=accountDao.save(account);
-		return accountId;
+		return "Account addedd succsessfully account id:" +accountId ;
 	}
 
 	/**
