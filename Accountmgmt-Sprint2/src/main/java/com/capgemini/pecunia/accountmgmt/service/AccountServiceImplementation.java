@@ -63,10 +63,10 @@ public class AccountServiceImplementation implements IAccountService {
 		String accountId = AccountUtil.generateId("",12);
 		account.setAccountId(accountId);
 		account.setCustomer(customer);
-        account.setAccountStatus("active");
-        account.setAccountHolderId(customerId);
-        account.setCustomer(customer);
-        account.setLastUpdated(new Date());
+                account.setAccountStatus("active");
+                account.setAccountHolderId(customerId);
+                account.setCustomer(customer);
+                account.setLastUpdated(new Date());
 		account=accountDao.save(account);
 		return "Account addedd succsessfully account id:" +accountId ;
 	}
@@ -137,5 +137,10 @@ public class AccountServiceImplementation implements IAccountService {
 		return "Update Unsuccessful";
 	}
 
+<<<<<<< HEAD
 		
+=======
+	
+	
+>>>>>>> 84a9eb32f7b102e3aeae08532c5de5c718f0e280
 }

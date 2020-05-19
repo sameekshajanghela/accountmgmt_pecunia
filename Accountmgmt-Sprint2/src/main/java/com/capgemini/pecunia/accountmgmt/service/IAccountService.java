@@ -19,4 +19,8 @@ public interface IAccountService {
 
     String updateCustomerContact(Account account, Customer customer);
 
+<<<<<<< HEAD
+=======
+	Customer findByCustomerId(String customerId);
+>>>>>>> 84a9eb32f7b102e3aeae08532c5de5c718f0e280
 }
