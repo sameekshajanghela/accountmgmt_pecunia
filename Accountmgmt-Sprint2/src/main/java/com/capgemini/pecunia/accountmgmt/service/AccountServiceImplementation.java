@@ -63,10 +63,10 @@ public class AccountServiceImplementation implements IAccountService {
 		String accountId = AccountUtil.generateId("",12);
 		account.setAccountId(accountId);
 		account.setCustomer(customer);
-        account.setAccountStatus("active");
-        account.setAccountHolderId(customerId);
-        account.setCustomer(customer);
-        account.setLastUpdated(new Date());
+                account.setAccountStatus("active");
+                account.setAccountHolderId(customerId);
+                account.setCustomer(customer);
+                account.setLastUpdated(new Date());
 		account=accountDao.save(account);
 		return "Account addedd succsessfully account id:" +accountId ;
 	}
@@ -157,20 +157,6 @@ public class AccountServiceImplementation implements IAccountService {
 		return "Update Unsuccessful";
 	}
 
-	/**
-	 * This method will update the customer address
-	 *
-	 * @return
-	 */
-	@Override
-	public String updateCustomerAddress(Account account, Address address) {
-		boolean exists = accountDao.existsById(account.getAccountId());
-		if (exists) {
-			address = addressDao.save(address);
-			return "Customer address added successfully";
-		}
-		return "Update Unsuccessful";
-	}
-
+	
 	
 }
