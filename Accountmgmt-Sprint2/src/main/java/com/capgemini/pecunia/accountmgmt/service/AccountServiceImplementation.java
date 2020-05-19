@@ -95,7 +95,10 @@ public class AccountServiceImplementation implements IAccountService {
 		throw new AccountNotFoundException("account not found for id=" + accountId);
 	}
 
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 3720d42bc353732d1659b96fbeaacc284b29d454
 	/**
 	 * @param accountId This method will delete the account by account id
 	 * @return

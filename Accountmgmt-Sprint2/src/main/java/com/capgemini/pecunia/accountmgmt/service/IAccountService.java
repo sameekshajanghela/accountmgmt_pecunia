@@ -17,10 +17,13 @@ public interface IAccountService {
 
 	String updateCustomerName(Account account, Customer customer);
 
-    String updateCustomerContact(Account account, Customer customer);
+        String updateCustomerContact(Account account, Customer customer);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 	Customer findByCustomerId(String customerId);
 >>>>>>> 84a9eb32f7b102e3aeae08532c5de5c718f0e280
+=======
+>>>>>>> 3720d42bc353732d1659b96fbeaacc284b29d454
 }
