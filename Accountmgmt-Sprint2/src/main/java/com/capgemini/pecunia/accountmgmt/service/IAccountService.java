@@ -21,7 +21,5 @@ public interface IAccountService {
 
     String updateCustomerContact(Account account, Customer customer);
 
-	String updateCustomerAddress(Account account, Address address);
-
 	Customer findByCustomerId(String customerId);
 }
