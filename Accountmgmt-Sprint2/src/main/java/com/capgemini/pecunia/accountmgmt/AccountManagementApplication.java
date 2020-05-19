@@ -19,5 +19,17 @@ public class AccountManagementApplication {
 	public RestTemplate restTemplate(){
 		return new RestTemplate();
 	}
+	@Bean
+	public CorsFilter corsFilter(){
+		UrlBasedCorsConfigurationSource src=new UrlBasedCorsConfigurationSource();
+		CorsConfiguration configuration=new CorsConfiguration();
+		configuration.setAllowCredentials(true);
+		configuration.addAllowedHeader("*");
+		configuration.addAllowedOrigin("*");
+		configuration.addAllowedMethod("*");
+		src.registerCorsConfiguration("/**",configuration);
+		return new CorsFilter(src);
+	
 
 }
+	}
